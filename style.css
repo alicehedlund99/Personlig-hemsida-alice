@@ -1,0 +1,401 @@
+/* 1 · Box-modellen: bredden gäller hela lådan */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* 2 · Varumärket som variabler */
+:root {
+    --text: #1f2430;
+    --yta: #ffffff;
+    --yta-2: #f3f1ec;
+    --primar: #6f8259;
+    --accent: #ffd166;
+    --luft: 1rem;
+    --radie: 12px;
+}
+
+/* 3 · Grundstil */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--yta);
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+    color: var(--primar);
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+h2 {
+    font-size: 1.75rem;
+    margin-top: 0;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+p {
+    max-width: 65ch;
+}
+
+a {
+    color: var(--primar);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 4 · Sidhuvud och meny */
+.sidhuvud {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    gap: calc(var(--luft) * 1.5);
+    padding: calc(var(--luft) * 2.5) calc(var(--luft) * 1.5) 0;
+    background-color: var(--yta-2);
+    background-image: url("images/hero-bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.header-bild {
+    width: 160px;
+    height: auto;
+    display: block;
+    align-self: flex-end;
+    margin-bottom: 0;
+    flex-shrink: 0;
+}
+
+.header-text {
+    text-align: left;
+    padding-bottom: calc(var(--luft) * 2);
+}
+
+.roll {
+    margin: 0.5rem 0 0 0;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--yta);
+    border-bottom: 1px solid #e2ded5;
+    padding: 0.85rem var(--luft);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: calc(var(--luft) * 1.5);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    font-weight: 600;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* 5 · Innehållsytan */
+main {
+    max-width: 70rem;
+    margin: 0 auto;
+    padding: 0 calc(var(--luft) * 1.5);
+}
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--luft) * 2);
+}
+
+.profilbild {
+    max-width: 200px;
+    height: auto;
+    flex-shrink: 0;
+}
+
+section {
+    padding: calc(var(--luft) * 3) 0;
+    scroll-margin-top: 4.5rem;
+}
+
+.knapp {
+    display: inline-block;
+    padding: 0.75rem 1.25rem;
+    background: var(--accent);
+    color: var(--text);
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: var(--radie);
+}
+
+/* 6 · Kort i ett rutnät */
+.rutnat {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: calc(var(--luft) * 1.5);
+    list-style: none;
+    padding: 0;
+}
+
+.kort {
+    background: var(--yta-2);
+    padding: calc(var(--luft) * 1.5);
+    border: 1px solid #e2ded5;
+    border-radius: var(--radie);
+}
+
+.kort h3 {
+    margin-top: 0;
+}
+
+.kort img {
+    border-radius: calc(var(--radie) / 2);
+    margin-bottom: var(--luft);
+}
+
+.kort ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.kort li {
+    margin-bottom: 0.35rem;
+}
+
+/* Fritid / Fotogalleri */
+.foto-rad {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    overflow-x: auto;
+    padding: 0.5rem 0.25rem 1rem;
+    margin-top: var(--luft);
+    scrollbar-width: thin;
+}
+
+.foto-rad img {
+    height: 95px;
+    width: auto;
+    max-width: 140px;
+    object-fit: cover;
+    border-radius: var(--radie);
+    border: 1px solid #e2ded5;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, outline 0.2s ease;
+}
+
+.foto-rad img:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.foto-rad img:focus-visible {
+    outline: 3px solid var(--primar);
+    outline-offset: 2px;
+}
+
+/* Lightbox-modal för förstorad bild */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 25, 20, 0.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    padding: 1.5rem;
+    cursor: zoom-out;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.modal.aktiv {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-innehall {
+    position: relative;
+    max-width: 92vw;
+    max-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: default;
+}
+
+.modal-innehall img {
+    max-width: 90vw;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: var(--radie);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+    animation: modalZoom 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalZoom {
+    from {
+        transform: scale(0.92);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-bildtext {
+    color: #f7f6f2;
+    margin: 0.75rem 0 0 0;
+    font-size: 0.95rem;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+.modal-stang {
+    position: absolute;
+    top: -2.75rem;
+    right: 0;
+    background: none;
+    border: none;
+    color: #f7f6f2;
+    font-size: 2.5rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 0.5rem;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.modal-stang:hover {
+    transform: scale(1.2);
+    color: var(--accent);
+}
+
+/* 7 · Knappar och fokus */
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--primar);
+    outline-offset: 3px;
+}
+
+footer {
+    padding: calc(var(--luft) * 2);
+    text-align: center;
+    background: var(--yta-2);
+}
+
+footer p {
+    margin: 0 auto;
+}
+
+/* 8 · Mindre skärmar / Mobiler */
+@media (max-width: 40rem) {
+    .sidhuvud {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: calc(var(--luft) * 2) var(--luft) 0;
+        gap: var(--luft);
+    }
+
+    .header-text {
+        text-align: center;
+        padding-bottom: 0;
+    }
+
+    .header-bild {
+        width: 170px;
+        margin-bottom: 0;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.35rem;
+    }
+
+    nav {
+        padding: 0.6rem 0.5rem;
+    }
+
+    nav ul {
+        gap: 0.4rem 0.85rem;
+        font-size: 0.88rem;
+    }
+
+    main {
+        padding: 0 var(--luft);
+    }
+
+    section {
+        padding: calc(var(--luft) * 2) 0;
+    }
+}
+
+/* 9 · Större skärmar */
+@media (min-width: 48rem) {
+    .sidhuvud {
+        gap: calc(var(--luft) * 3);
+        padding: calc(var(--luft) * 3) calc(var(--luft) * 3) 0;
+    }
+
+    .header-bild {
+        width: 250px;
+    }
+
+    .header-text {
+        padding-bottom: calc(var(--luft) * 3.5);
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+}
