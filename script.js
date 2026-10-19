@@ -81,3 +81,37 @@ if (modal) {
         }
     });
 }
+
+// --- Mörkläge (Dark mode) knapp uppe i vänstra hörnet ---
+const temaKnapp = document.createElement("button");
+temaKnapp.id = "morklage-knapp";
+temaKnapp.className = "morklage-knapp";
+temaKnapp.setAttribute("type", "button");
+
+// Kontrollera om användaren har sparat val eller föredrar mörkt tema i systemet
+const sparatTema = localStorage.getItem("tema");
+const foredrarMorkt = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+if (sparatTema === "morkt" || (!sparatTema && foredrarMorkt)) {
+    document.body.classList.add("morkt-lage");
+}
+
+function uppdateraTemaKnapp() {
+    const arMorkt = document.body.classList.contains("morkt-lage");
+    temaKnapp.innerHTML = `<span class="knapp-ikon" aria-hidden="true">${arMorkt ? "☀️" : "🌙"}</span><span class="knapp-text">${arMorkt ? "Ljust läge" : "Mörkt läge"}</span>`;
+    const etikett = arMorkt ? "Växla till ljust läge" : "Växla till mörkt läge";
+    temaKnapp.setAttribute("aria-label", etikett);
+    temaKnapp.setAttribute("title", etikett);
+}
+
+uppdateraTemaKnapp();
+
+temaKnapp.addEventListener("click", () => {
+    document.body.classList.toggle("morkt-lage");
+    const arMorkt = document.body.classList.contains("morkt-lage");
+    localStorage.setItem("tema", arMorkt ? "morkt" : "ljust");
+    uppdateraTemaKnapp();
+});
+
+// Lägg till knappen längst upp i bodyn så den hamnar först i tab-ordningen
+document.body.prepend(temaKnapp);

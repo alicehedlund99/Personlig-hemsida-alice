@@ -12,6 +12,7 @@
     --yta-2: #f3f1ec;
     --primar: #6f8259;
     --accent: #ffd166;
+    --kant: #e2ded5;
     --luft: 1rem;
     --radie: 12px;
 }
@@ -28,6 +29,7 @@ body {
     line-height: 1.6;
     color: var(--text);
     background: var(--yta);
+    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 h1,
@@ -103,9 +105,10 @@ nav {
     top: 0;
     z-index: 100;
     background: var(--yta);
-    border-bottom: 1px solid #e2ded5;
+    border-bottom: 1px solid var(--kant);
     padding: 0.85rem var(--luft);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 nav ul {
@@ -174,8 +177,9 @@ section {
 .kort {
     background: var(--yta-2);
     padding: calc(var(--luft) * 1.5);
-    border: 1px solid #e2ded5;
+    border: 1px solid var(--kant);
     border-radius: var(--radie);
+    transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .kort h3 {
@@ -213,11 +217,11 @@ section {
     max-width: 140px;
     object-fit: cover;
     border-radius: var(--radie);
-    border: 1px solid #e2ded5;
+    border: 1px solid var(--kant);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     flex-shrink: 0;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, outline 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, outline 0.2s ease, border-color 0.25s ease;
 }
 
 .foto-rad img:hover {
@@ -397,5 +401,75 @@ footer p {
 
     h2 {
         font-size: 2rem;
+    }
+}
+
+/* 10 · Mörkläge (Dark mode) */
+body.morkt-lage {
+    --text: #f0f3f6;
+    --yta: #0f141c;
+    --yta-2: #181f2a;
+    --primar: #a0c67d;
+    --accent: #ffd166;
+    --kant: #2c3646;
+}
+
+body.morkt-lage .sidhuvud {
+    background-color: var(--yta-2);
+}
+
+body.morkt-lage nav {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.morkt-lage .kort {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+body.morkt-lage footer {
+    border-top: 1px solid var(--kant);
+}
+
+/* 11 · Mörkläges-knapp i övre vänstra hörnet */
+.morklage-knapp {
+    position: fixed;
+    top: 10px;
+    left: 14px;
+    z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.85rem;
+    background: var(--yta);
+    color: var(--text);
+    border: 1px solid var(--kant);
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s ease, background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.2s ease;
+}
+
+.morklage-knapp:hover {
+    transform: translateY(-1px) scale(1.03);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.morklage-knapp:focus-visible {
+    outline: 3px solid var(--primar);
+    outline-offset: 2px;
+}
+
+@media (max-width: 40rem) {
+    .morklage-knapp {
+        top: 8px;
+        left: 8px;
+        padding: 0.4rem 0.65rem;
+    }
+
+    .morklage-knapp .knapp-text {
+        display: none;
     }
 }
